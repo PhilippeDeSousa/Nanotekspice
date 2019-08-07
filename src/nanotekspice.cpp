@@ -6,10 +6,10 @@ void nano::Nanotekspice::run() {
 	std::cout << "Running" << std::endl;
 }
 
-bool nano::Nanotekspice::checkContent(const std::vector<std::string> fileContent) const {
+bool nano::Nanotekspice::checkContent(const std::vector<std::string> &fileContent) const {
 	bool chip = false;
 	bool links = false;
-	for (auto i: fileContent) {
+	for (auto &&i: fileContent) {
 		if (i.compare(".chipsets:") == 0)
 			chip = true;
 		else if (i.compare(".links:") == 0)
@@ -20,7 +20,7 @@ bool nano::Nanotekspice::checkContent(const std::vector<std::string> fileContent
 
 void disp(const std::vector<std::string> &arr) {
 	std::cout << "Array: \n";
-	for (auto &i: arr)
+	for (auto &&i: arr)
 		std::cout << i << std::endl;
 }
 
@@ -30,7 +30,7 @@ bool nano::Nanotekspice::setLinks(const std::vector<std::string> &fileContent, c
 	return true;
 }
 
-bool nano::Nanotekspice::setIO(std::vector<std::string> fileContent) {
+bool nano::Nanotekspice::setIO(std::vector<std::string> &fileContent) {
 	std::vector<std::string> inputs;
 	std::vector<std::string> outputs;
 	for (auto &&i: fileContent)
