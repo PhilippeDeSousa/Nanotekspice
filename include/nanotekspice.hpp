@@ -9,7 +9,7 @@ namespace nano {
 	class Nanotekspice {
 		private:
 			bool setIO(std::vector<std::string>);
-			bool setLinks(const std::vector<std::string>, const std::vector<std::string>, const std::vector<std::string>);
+			bool setLinks(const std::vector<std::string> &, const std::vector<std::string> &, const std::vector<std::string> &);
 			bool checkContent(const std::vector<std::string>) const;
 		public:
 			Nanotekspice();
