@@ -12,7 +12,7 @@ namespace nano {
 			bool setLinks(const std::vector<std::string> &, const std::vector<std::string> &, const std::vector<std::string> &);
 			bool checkContent(const std::vector<std::string> &) const;
 		public:
-			Nanotekspice();
+			Nanotekspice() = default;
 			~Nanotekspice() = default;
 			int parseFile(const std::string &filename);
 			void run();

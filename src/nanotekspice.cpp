@@ -67,5 +67,3 @@ int nano::Nanotekspice::parseFile(const std::string &filename) {
 
 	return 0;
 }
-
-nano::Nanotekspice::Nanotekspice() {}
