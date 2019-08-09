@@ -1,6 +1,7 @@
 #include "nanotekspice.hpp"
 #include <fstream>
 #include <vector>
+#include "output.hpp"
 
 void disp(const std::vector<std::string> &arr) {
 	std::cout << "Array: \n";
@@ -33,7 +34,7 @@ bool nts::Nanotekspice::setLinks(const std::vector<std::string> &fileContent) {
 	}
 	for (i += 1 ; i < fileContent.size(); i++) {
 		size_t pos = fileContent[i].find_last_of(' ');
-		links.push_back(std::make_pair(fileContent[i].substr(0, pos + 1), fileContent[i].substr(pos + 1)));
+		links.emplace_back(fileContent[i].substr(0, pos + 1), fileContent[i].substr(pos + 1));
 	}
 	disp(inputs);
 	disp(outputs);
@@ -61,7 +62,9 @@ bool nts::Nanotekspice::setIO(std::vector<std::string> &fileContent) {
 			inputs.push_back(i.substr(6));
 		}
 		else if (i.find("output", 0) != std::string::npos) {
-			outputs.push_back(i.substr(7));
+			// No default constructor exists for class Output
+			Output(i);
+			outputs.push_back(Output(i.substr(7)));
 		}
 		else if (i.compare(".links:") == 0)
 			break;

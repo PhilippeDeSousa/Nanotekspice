@@ -4,6 +4,8 @@
 #include <vector>
 #include <array>
 
+#include "IComponent.hpp"
+
 namespace nts {
 	using link = std::pair<std::string, std::string>;
 
@@ -20,10 +22,11 @@ namespace nts {
 			bool checkContent(const std::vector<std::string> &) const;
 			bool setChip(const std::string &);
 			std::vector<nts::link> links;
-			std::vector<std::string> outputs;
+			std::vector<nts::IComponent> outputs;
 			std::vector<std::string> inputs;
 			// Need to create real chips
 			std::vector<std::string> chips;
+			std::vector<IComponent> chipsets;
 	};
 
 };
