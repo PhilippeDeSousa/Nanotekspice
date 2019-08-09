@@ -11,16 +11,16 @@ namespace nts {
 		}
 		~Output() = default;
 
-		nts::Tristate compute(std:: size_t pin = 1) {
+		virtual nts::Tristate compute(std:: size_t pin = 1) {
 			if (pin != 1)
 				std::cout << "Pin " << pin << " does not exist\n";
 			return pinValue;
 		};
 
-		void setLink(std::size_t, nts::IComponent &, std::size_t) {
+		virtual void setLink(std::size_t, nts::IComponent &, std::size_t) {
 		};
 
-		void dump() const {
+		virtual void dump() const {
 
 		};
 

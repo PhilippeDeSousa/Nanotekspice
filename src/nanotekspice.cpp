@@ -3,7 +3,7 @@
 #include <vector>
 
 
-void nts::Nanotekspice::dispOutputs(std::vector<nts::IComponent *> &arr) const {
+void nts::Nanotekspice::dispOutputs(std::vector<nts::IComponent *> &arr) {
 	std::cout << "Outputs array: \n";
 	for (auto &&i: arr)
 		std::cout << i->getName() << std::endl;
@@ -61,12 +61,11 @@ bool nts::Nanotekspice::setIO(std::vector<std::string> &fileContent) {
 			continue;
 		if (i.find("input", 0) != std::string::npos) {
 			std::string toto = i.substr(6);
-			//inputs.push_back(Input(toto));
+			inputs.push_back(new Input(toto));
 		}
 		else if (i.find("output", 0) != std::string::npos) {
-			// No default constructor exists for class Output
 			const std::string toto = i.substr(7);
-			outputs.push_back(&Output(toto));
+			outputs.push_back(new Output(toto));
 		}
 		else if (i.compare(".links:") == 0)
 			break;

@@ -17,7 +17,7 @@ namespace nts {
 			int parseFile(const std::string &filename);
 			void run();
 		private:
-			void dispOutputs(std::vector<nts::IComponent *> &arr) const;
+			void dispOutputs(std::vector<nts::IComponent *> &arr);
 			bool setIO(std::vector<std::string> &);
 			bool setLinks(const std::vector<std::string> &);
 			bool findChips(const std::vector<std::string> &);
@@ -25,7 +25,7 @@ namespace nts {
 			bool setChip(const std::string &);
 			std::vector<nts::link> links;
 			std::vector<nts::IComponent *> outputs;
-			std::vector<nts::Input&> inputs;
+			std::vector<nts::IComponent *> inputs;
 			// Need to create real chips
 			std::vector<std::string> chips;
 			std::vector<IComponent> chipsets;
