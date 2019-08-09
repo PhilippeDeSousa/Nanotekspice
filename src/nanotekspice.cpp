@@ -3,7 +3,7 @@
 #include <vector>
 
 
-void nts::Nanotekspice::dispOutputs(std::vector<nts::IComponent *> &arr) {
+void nts::Nanotekspice::disp(std::vector<nts::IComponent *> &arr) {
 	std::cout << "Outputs array: \n";
 	for (auto &&i: arr)
 		std::cout << i->getName() << std::endl;
@@ -36,8 +36,8 @@ bool nts::Nanotekspice::setLinks(const std::vector<std::string> &fileContent) {
 		size_t pos = fileContent[i].find_last_of(' ');
 		links.emplace_back(fileContent[i].substr(0, pos + 1), fileContent[i].substr(pos + 1));
 	}
-	//dispOutputs(inputs);
-	dispOutputs(outputs);
+	disp(inputs);
+	disp(outputs);
 	return true;
 }
 
