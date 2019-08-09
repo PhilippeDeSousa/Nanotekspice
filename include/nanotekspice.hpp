@@ -2,8 +2,10 @@
 
 #include <iostream>
 #include <vector>
+#include <array>
 
-namespace nano {
+namespace nts {
+	using link = std::pair<std::string, std::string>;
 
 	class Nanotekspice {
 		public:
@@ -13,8 +15,15 @@ namespace nano {
 			void run();
 		private:
 			bool setIO(std::vector<std::string> &);
-			bool setLinks(const std::vector<std::string> &, const std::vector<std::string> &, const std::vector<std::string> &);
+			bool setLinks(const std::vector<std::string> &);
+			bool findChips(const std::vector<std::string> &);
 			bool checkContent(const std::vector<std::string> &) const;
+			bool setChip(const std::string &);
+			std::vector<nts::link> links;
+			std::vector<std::string> outputs;
+			std::vector<std::string> inputs;
+			// Need to create real chips
+			std::vector<std::string> chips;
 	};
 
 };

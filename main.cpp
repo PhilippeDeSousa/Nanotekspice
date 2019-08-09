@@ -3,7 +3,7 @@
 int main(const int ac, const char * const av[]) {
 	try {
 		(void)ac;
-		nano::Nanotekspice nanotek;
+		nts::Nanotekspice nanotek;
 
 		nanotek.parseFile(av[1]);
 		nanotek.run();

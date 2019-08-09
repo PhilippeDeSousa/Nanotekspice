@@ -2,11 +2,17 @@
 #include <fstream>
 #include <vector>
 
-void nano::Nanotekspice::run() {
+void disp(const std::vector<std::string> &arr) {
+	std::cout << "Array: \n";
+	for (auto &&i: arr)
+		std::cout << i << std::endl;
+}
+
+void nts::Nanotekspice::run() {
 	std::cout << "Running" << std::endl;
 }
 
-bool nano::Nanotekspice::checkContent(const std::vector<std::string> &fileContent) const {
+bool nts::Nanotekspice::checkContent(const std::vector<std::string> &fileContent) const {
 	bool chip = false;
 	bool links = false;
 	for (auto &&i: fileContent) {
@@ -17,33 +23,57 @@ bool nano::Nanotekspice::checkContent(const std::vector<std::string> &fileConten
 	}
 	return links && chip;
 }
-
-void disp(const std::vector<std::string> &arr) {
-	std::cout << "Array: \n";
-	for (auto &&i: arr)
-		std::cout << i << std::endl;
-}
-
-bool nano::Nanotekspice::setLinks(const std::vector<std::string> &fileContent, const std::vector<std::string> &inputs, const std::vector<std::string> &outputs) {
+	
+bool nts::Nanotekspice::setLinks(const std::vector<std::string> &fileContent) {
+	size_t i = 0;
+	for (auto &&l: fileContent) {
+		if (l.compare(".links:") == 0)
+			break;
+		i++;
+	}
+	for (i += 1 ; i < fileContent.size(); i++) {
+		size_t pos = fileContent[i].find_last_of(' ');
+		links.push_back(std::make_pair(fileContent[i].substr(0, pos + 1), fileContent[i].substr(pos + 1)));
+	}
 	disp(inputs);
 	disp(outputs);
 	return true;
 }
 
-bool nano::Nanotekspice::setIO(std::vector<std::string> &fileContent) {
-	std::vector<std::string> inputs;
-	std::vector<std::string> outputs;
-	for (auto &&i: fileContent)
+static const std::array<std::string, 2> CHIPS = {
+    "4081",
+	"4008"
+};
+
+bool nts::Nanotekspice::setChip(const std::string &str) {
+	for (auto &&i: CHIPS) {
+		if (str.find(i, 0) != std::string::npos) {
+			chips.push_back(str);
+		}
+	}
+}
+
+bool nts::Nanotekspice::setIO(std::vector<std::string> &fileContent) {
+	for (auto &&i: fileContent) {
+		if (i.compare(".chipsets:") == 0)
+			continue;
 		if (i.find("input", 0) != std::string::npos) {
 			inputs.push_back(i.substr(6));
 		}
 		else if (i.find("output", 0) != std::string::npos) {
 			outputs.push_back(i.substr(7));
 		}
-	return setLinks(fileContent, inputs, outputs);
+		else if (i.compare(".links:") == 0)
+			break;
+		else {
+			setChip(i);
+		}
+	}
+	disp(chips);
+	return setLinks(fileContent);
 }
 
-int nano::Nanotekspice::parseFile(const std::string &filename) {
+int nts::Nanotekspice::parseFile(const std::string &filename) {
 	std::cout << "Filename: " << filename << std::endl;
 	std::ifstream file;
 	std::vector<std::string> fileContent;
@@ -64,6 +94,5 @@ int nano::Nanotekspice::parseFile(const std::string &filename) {
 			return (setIO(fileContent));
 		return 1;
 	}
-
 	return 0;
 }
