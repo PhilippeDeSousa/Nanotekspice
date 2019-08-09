@@ -17,14 +17,14 @@ namespace nts {
 			int parseFile(const std::string &filename);
 			void run();
 		private:
-			void nts::Nanotekspice::dispOutputs(std::vector<const nts::IComponent> &) const;
+			void nts::Nanotekspice::dispOutputs(std::vector<nts::IComponent *> &arr) const;
 			bool setIO(std::vector<std::string> &);
 			bool setLinks(const std::vector<std::string> &);
 			bool findChips(const std::vector<std::string> &);
 			bool checkContent(const std::vector<std::string> &) const;
 			bool setChip(const std::string &);
 			std::vector<nts::link> links;
-			std::vector<const nts::Output&> outputs;
+			std::vector<nts::IComponent *> &outputs;
 			std::vector<nts::Input&> inputs;
 			// Need to create real chips
 			std::vector<std::string> chips;
