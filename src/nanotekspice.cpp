@@ -1,12 +1,12 @@
 #include "nanotekspice.hpp"
 #include <fstream>
 #include <vector>
-#include "output.hpp"
 
-void disp(const std::vector<std::string> &arr) {
-	std::cout << "Array: \n";
+
+void nts::Nanotekspice::dispOutputs(std::vector<const nts::IComponent> &arr) const {
+	std::cout << "Outputs array: \n";
 	for (auto &&i: arr)
-		std::cout << i << std::endl;
+		std::cout << i.getName() << std::endl;
 }
 
 void nts::Nanotekspice::run() {
@@ -36,8 +36,8 @@ bool nts::Nanotekspice::setLinks(const std::vector<std::string> &fileContent) {
 		size_t pos = fileContent[i].find_last_of(' ');
 		links.emplace_back(fileContent[i].substr(0, pos + 1), fileContent[i].substr(pos + 1));
 	}
-	disp(inputs);
-	disp(outputs);
+	//dispOutputs(inputs);
+	dispOutputs(outputs);
 	return true;
 }
 
@@ -52,6 +52,7 @@ bool nts::Nanotekspice::setChip(const std::string &str) {
 			chips.push_back(str);
 		}
 	}
+	return true;
 }
 
 bool nts::Nanotekspice::setIO(std::vector<std::string> &fileContent) {
@@ -59,12 +60,13 @@ bool nts::Nanotekspice::setIO(std::vector<std::string> &fileContent) {
 		if (i.compare(".chipsets:") == 0)
 			continue;
 		if (i.find("input", 0) != std::string::npos) {
-			inputs.push_back(i.substr(6));
+			std::string toto = i.substr(6);
+			//inputs.push_back(Input(toto));
 		}
 		else if (i.find("output", 0) != std::string::npos) {
 			// No default constructor exists for class Output
-			Output(i);
-			outputs.push_back(Output(i.substr(7)));
+			const std::string toto = i.substr(7);
+			outputs.push_back(Output(toto));
 		}
 		else if (i.compare(".links:") == 0)
 			break;
@@ -72,7 +74,7 @@ bool nts::Nanotekspice::setIO(std::vector<std::string> &fileContent) {
 			setChip(i);
 		}
 	}
-	disp(chips);
+	//disp(chips);
 	return setLinks(fileContent);
 }
 

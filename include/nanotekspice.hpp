@@ -4,7 +4,8 @@
 #include <vector>
 #include <array>
 
-#include "IComponent.hpp"
+#include "output.hpp"
+#include "input.hpp"
 
 namespace nts {
 	using link = std::pair<std::string, std::string>;
@@ -16,14 +17,15 @@ namespace nts {
 			int parseFile(const std::string &filename);
 			void run();
 		private:
+			void nts::Nanotekspice::dispOutputs(std::vector<const nts::IComponent> &) const;
 			bool setIO(std::vector<std::string> &);
 			bool setLinks(const std::vector<std::string> &);
 			bool findChips(const std::vector<std::string> &);
 			bool checkContent(const std::vector<std::string> &) const;
 			bool setChip(const std::string &);
 			std::vector<nts::link> links;
-			std::vector<nts::IComponent> outputs;
-			std::vector<std::string> inputs;
+			std::vector<const nts::Output&> outputs;
+			std::vector<nts::Input&> inputs;
 			// Need to create real chips
 			std::vector<std::string> chips;
 			std::vector<IComponent> chipsets;
