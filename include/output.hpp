@@ -5,23 +5,20 @@
 namespace nts {
 	class Output : public IComponent {
 	public:
-		Output() {}
-		Output(const std::string &_name): name(_name) {
-
-		}
+		Output() = default;
+		Output(const std::string &_name): name(_name) {};
 		~Output() = default;
 
-		virtual nts::Tristate compute(std:: size_t pin = 1) {
-			if (pin != 1)
-				std::cout << "Pin " << pin << " does not exist\n";
-			return pinValue;
+		nts::Tristate compute(std:: size_t pin = 1) {
+			(void)pin;
+			return state;
 		};
 
-		virtual void setLink(std::size_t, nts::IComponent &, std::size_t) {
+		void setLink(std::size_t, nts::IComponent &, std::size_t) {
 		};
 
-		virtual void dump() const {
-
+		void dump() const {
+			
 		};
 
 		std::string getName() const {
@@ -29,7 +26,7 @@ namespace nts {
 		}
 	private:
 		const std::string name;
-		nts::Tristate pinValue;
-		//nts::IComponent link;
+		std::vector<nts::Tristate> pins;
+		nts::Tristate state;
 	};
 }

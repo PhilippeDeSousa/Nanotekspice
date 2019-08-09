@@ -49,7 +49,7 @@ static const std::array<std::string, 2> CHIPS = {
 bool nts::Nanotekspice::setChip(const std::string &str) {
 	for (auto &&i: CHIPS) {
 		if (str.find(i, 0) != std::string::npos) {
-			chips.push_back(str);
+			chips.push_back(new Chip4081(str));
 		}
 	}
 	return true;
@@ -73,7 +73,7 @@ bool nts::Nanotekspice::setIO(std::vector<std::string> &fileContent) {
 			setChip(i);
 		}
 	}
-	//disp(chips);
+	disp(chips);
 	return setLinks(fileContent);
 }
 

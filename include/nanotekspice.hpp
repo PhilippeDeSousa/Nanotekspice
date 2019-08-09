@@ -6,6 +6,7 @@
 
 #include "output.hpp"
 #include "input.hpp"
+#include "4081.hpp"
 
 namespace nts {
 	using link = std::pair<std::string, std::string>;
@@ -27,8 +28,7 @@ namespace nts {
 			std::vector<nts::IComponent *> outputs;
 			std::vector<nts::IComponent *> inputs;
 			// Need to create real chips
-			std::vector<std::string> chips;
-			std::vector<IComponent> chipsets;
+			std::vector<nts::IComponent *> chips;
 	};
 
 };
