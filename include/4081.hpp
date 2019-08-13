@@ -6,7 +6,7 @@ namespace nts {
 	class Chip4081 : public AComponent {
 	public:
 		Chip4081() = default;
-		Chip4081(const std::string &_name): _name(_name) {};
+		Chip4081(const std::string &name): AComponent(name) {};
 		~Chip4081() = default;
 
 		nts::Tristate compute(std:: size_t pin = 1) {
@@ -21,7 +21,6 @@ namespace nts {
 			
 		};
 	private:
-		const std::string _name;
 		std::vector<nts::Tristate> pins;
 		nts::Tristate state;
 	};
