@@ -14,7 +14,7 @@ namespace nts {
 			return state;
 		};
 
-		void setLink(std::size_t, nts::AComponent &, std::size_t) {
+		void setLink(std::size_t, nts::IComponent &, std::size_t) {
 		};
 
 		void dump() const {

@@ -6,7 +6,9 @@ namespace nts {
 	class Output : public AComponent {
 	public:
 		Output() = default;
-		Output(const std::string &_name): name(_name) {};
+		Output(const std::string &_name): name(_name) {
+			std::cout << "J'ai trouvé un output\n";
+		};
 		~Output() = default;
 
 		nts::Tristate compute(std:: size_t pin = 1) {
@@ -14,7 +16,7 @@ namespace nts {
 			return state;
 		};
 
-		void setLink(std::size_t, nts::AComponent &, std::size_t) {
+		void setLink(std::size_t, nts::IComponent &, std::size_t) {
 		};
 
 		void dump() const {
