@@ -18,17 +18,17 @@ namespace nts {
 			int parseFile(const std::string &filename);
 			void run();
 		private:
-			void disp(std::vector<nts::IComponent *> &arr);
+			void disp(std::vector<nts::AComponent *> &arr);
 			bool setIO(std::vector<std::string> &);
 			bool setLinks(const std::vector<std::string> &);
 			bool findChips(const std::vector<std::string> &);
 			bool checkContent(const std::vector<std::string> &) const;
 			bool setChip(const std::string &);
 			std::vector<nts::link> links;
-			std::vector<nts::IComponent *> outputs;
-			std::vector<nts::IComponent *> inputs;
+			std::vector<nts::AComponent *> outputs;
+			std::vector<nts::AComponent *> inputs;
 			// Need to create real chips
-			std::vector<nts::IComponent *> chips;
+			std::vector<nts::AComponent *> chips;
 	};
 
 };

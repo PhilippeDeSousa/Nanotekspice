@@ -1,9 +1,9 @@
 #pragma once
 
-#include "IComponent.hpp"
+#include "AComponent.hpp"
 
 namespace nts {
-	class Chip4001 : public IComponent {
+	class Chip4001 : public AComponent {
 	public:
 		Chip4001() = default;
 		Chip4001(const std::string &_name): name(_name) {};
@@ -14,7 +14,7 @@ namespace nts {
 			return state;
 		};
 
-		void setLink(std::size_t, nts::IComponent &, std::size_t) {
+		void setLink(std::size_t, nts::AComponent &, std::size_t) {
 		};
 
 		void dump() const {

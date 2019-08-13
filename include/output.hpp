@@ -1,9 +1,9 @@
 #pragma once
 
-#include "IComponent.hpp"
+#include "AComponent.hpp"
 
 namespace nts {
-	class Output : public IComponent {
+	class Output : public AComponent {
 	public:
 		Output() = default;
 		Output(const std::string &_name): name(_name) {};
@@ -14,7 +14,7 @@ namespace nts {
 			return state;
 		};
 
-		void setLink(std::size_t, nts::IComponent &, std::size_t) {
+		void setLink(std::size_t, nts::AComponent &, std::size_t) {
 		};
 
 		void dump() const {
@@ -24,9 +24,14 @@ namespace nts {
 		std::string getName() const {
 			return name;
 		}
+		std::string getType() const {
+			return _type;
+		}
 	private:
 		const std::string name;
 		std::vector<nts::Tristate> pins;
 		nts::Tristate state;
+		std::string _type;
+		//AComponent &link;
 	};
 }

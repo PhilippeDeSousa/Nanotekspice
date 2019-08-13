@@ -2,8 +2,7 @@
 #include <fstream>
 #include <vector>
 
-
-void nts::Nanotekspice::disp(std::vector<nts::IComponent *> &arr) {
+void nts::Nanotekspice::disp(std::vector<nts::AComponent *> &arr) {
 	std::cout << "Outputs array: \n";
 	for (auto &&i: arr)
 		std::cout << i->getName() << std::endl;
@@ -38,6 +37,7 @@ bool nts::Nanotekspice::setLinks(const std::vector<std::string> &fileContent) {
 	}
 	disp(inputs);
 	disp(outputs);
+	disp(chips);
 	return true;
 }
 
@@ -73,7 +73,6 @@ bool nts::Nanotekspice::setIO(std::vector<std::string> &fileContent) {
 			setChip(i);
 		}
 	}
-	disp(chips);
 	return setLinks(fileContent);
 }
 
