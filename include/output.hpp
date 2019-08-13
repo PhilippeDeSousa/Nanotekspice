@@ -6,7 +6,7 @@ namespace nts {
 	class Output : public AComponent {
 	public:
 		Output() = default;
-		Output(const std::string &_name): name(_name) {
+		Output(const std::string &_name): _name(_name) {
 			std::cout << "J'ai trouvé un output\n";
 		};
 		~Output() = default;
@@ -22,15 +22,12 @@ namespace nts {
 		void dump() const {
 			
 		};
-
 		std::string getName() const {
-			return name;
+			return _name;
 		}
-		std::string getType() const {
-			return _type;
-		}
+		
 	private:
-		const std::string name;
+		const std::string _name;
 		std::vector<nts::Tristate> pins;
 		nts::Tristate state;
 		std::string _type;

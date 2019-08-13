@@ -6,7 +6,7 @@ namespace nts {
 	class Input : public AComponent {
 	public:
 		Input() = default;
-		Input(const std::string &_name): name(_name) {};
+		Input(const std::string &_name): _name(_name) {};
 		~Input() = default;
 
 		nts::Tristate compute(std:: size_t pin = 1) {
@@ -20,12 +20,8 @@ namespace nts {
 		void dump() const {
 			
 		};
-
-		std::string getName() const {
-			return name;
-		}
 	private:
-		const std::string name;
+		const std::string _name = "RandomName";
 		std::vector<nts::Tristate> pins;
 		nts::Tristate state;
 	};

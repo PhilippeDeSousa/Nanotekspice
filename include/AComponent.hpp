@@ -6,14 +6,14 @@ namespace nts {
 	class AComponent: public IComponent {
 		public:
 			~AComponent() {};
-			std::string getName() const {
+			virtual std::string getName() const {
 				return _name;
 			}
-			std::string getType() {
+			virtual std::string getType() const {
 				return _type;
 			}
-		private:
 			const std::string _name;
-			const std::string _type = "AComponent";
+			const std::string _type;
+		private:
 	};
 }

@@ -3,7 +3,7 @@
 #include <vector>
 
 void nts::Nanotekspice::disp(std::vector<nts::AComponent *> &arr) {
-	std::cout << "Outputs array: \n";
+	std::cout << "array: \n";
 	for (auto &&i: arr)
 		std::cout << i->getName() << std::endl;
 }
