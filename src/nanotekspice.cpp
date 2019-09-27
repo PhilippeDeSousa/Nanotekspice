@@ -16,9 +16,9 @@ bool nts::Nanotekspice::checkContent(const std::vector<std::string> &fileContent
 	bool chip = false;
 	bool links = false;
 	for (auto &&i: fileContent) {
-		if (i.compare(".chipsets:") == 0)
+		if (i == ".chipsets:")
 			chip = true;
-		else if (i.compare(".links:") == 0)
+		else if (i == ".links:")
 			links = true;
 	}
 	return links && chip;
@@ -57,7 +57,7 @@ bool nts::Nanotekspice::setChip(const std::string &str) {
 
 bool nts::Nanotekspice::setIO(std::vector<std::string> &fileContent) {
 	for (auto &&i: fileContent) {
-		if (i.compare(".chipsets:") == 0)
+		if (i == ".chipsets:")
 			continue;
 		if (i.find("input", 0) != std::string::npos) {
 			std::string toto = i.substr(6);
@@ -67,7 +67,7 @@ bool nts::Nanotekspice::setIO(std::vector<std::string> &fileContent) {
 			const std::string toto = i.substr(7);
 			outputs.push_back(new Output(toto));
 		}
-		else if (i.compare(".links:") == 0)
+		else if (i == ".links:")
 			break;
 		else {
 			setChip(i);
@@ -83,7 +83,7 @@ int nts::Nanotekspice::parseFile(const std::string &filename) {
 
 	file.open(filename, std::ifstream::in);
 	if (!file) {
-		std::cout << "TODO: Add excepections and throw" << std::endl;
+		std::cout << "TODO: Add exceptions and throw" << std::endl;
 		return 1;
 	}
 	else {
